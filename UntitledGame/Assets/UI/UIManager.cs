@@ -5,13 +5,9 @@ namespace UI
 {
   public static class UIManager
   {
-    public static IReadOnlyCollection<UIElement> UIElements => _activeUIElements.AsReadOnly();
-    public static Transform RootTransform => _root?.gameObject.transform ??
-      FindRoot().gameObject.transform;
-
     private static UIRootManager _root;
 
-    private static bool _rootWasFined = false;
+    private static bool _rootWasFinded = false;
 
     private static List<UIElement> _activeUIElements;
     private static List<UIElement> _cache;
@@ -24,40 +20,59 @@ namespace UI
       FindRoot();
     }
 
-    static public void Show(UIElement uiElement)
+    public static void Show(UIKey key, UITarget target = null)
     {
-      if (_cache.Contains(uiElement))
-        uiElement.Show();
-      else
-        ShowNew(uiElement, uiElement.Element);
+      foreach (var item in _cache)
+      {
+        if (item.Key == key)
+        {
+          if (item.HideOther)
+            HideOther(item.ForcedHideOther);
+
+          item.Show();
+
+          return;
+        }
+      }
+
+      ShowNew(key, target);
     }
 
-    static public void ShowNew(UIElement uiElement, GameObject uiObject,
+    public static void ShowNew(UIKey key, UITarget target = null,
       UIConfiguration configs = null)
     {
-      if (!_rootWasFined)
+      if (!_rootWasFinded)
         FindRoot();
 
-      if (configs != null)
-        uiElement.Init(configs);  
+      var item = UIPool.Get(key);
 
-      _activeUIElements.Add(uiObject.GetComponent<UIElement>());
+      var go = GameObject.Instantiate(item.prefab, _root.Canvas.transform);
+
+      var uiElement = go.GetComponent<UIElement>();
+
+      uiElement.Init(key, configs ?? item.configuration);
+
+      if (uiElement.HideOther)
+        HideOther(uiElement.ForcedHideOther);
+
+      _activeUIElements.Add(uiElement);
       _cache.Add(uiElement);
 
       uiElement.Show();
     }
 
-    static private void HideOther()
+    static private void HideOther(bool force)
     {
       if (true)
       {
         foreach (var element in _activeUIElements)
         {
           if (element.NeverHide)
-            if (true)
+            if (!force)
               continue;
 
-          MonoBehaviour.Destroy(element.gameObject);
+          if (element.NeedRemoveFromCache)
+            _cache.Remove(element);
 
           element.Hide();
         }
@@ -71,7 +86,7 @@ namespace UI
       if (_root == null)
         throw new System.NullReferenceException("Can not to find root for ui (UIRootManager).");
 
-      _rootWasFined = true;
+      _rootWasFinded = true;
 
       return _root;
     }

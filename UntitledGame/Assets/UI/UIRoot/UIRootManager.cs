@@ -1,7 +1,14 @@
-﻿using UnityEngine;
+﻿using UnityEditorInternal;
+using UnityEngine;
 
 public class UIRootManager : MonoBehaviour
 {
-  private void Start() =>
+  public Canvas Canvas { get; private set; }
+
+  private void Awake()
+  {
     DontDestroyOnLoad(gameObject);
+
+    Canvas = GameObject.FindObjectOfType<Canvas>();
+  }
 }

@@ -3,11 +3,15 @@ using UI;
 
 public class UIElement : MonoBehaviour
 {
+  public UIKey Key { get; private set; }
+
   public GameObject Element =>
     _element;
 
   public bool HideOther => _config.Show == ShowParametr.HideAll || ForcedHideOther;
   public bool ForcedHideOther => _config.Show == ShowParametr.ForcedHideAll;
+
+  public bool NeedRemoveFromCache => _config.CacheType == CacheParametr.Destroy;
 
   public bool NeverHide => _config.Hide == HideParametr.NeverHide;
 
@@ -15,16 +19,23 @@ public class UIElement : MonoBehaviour
 
   private UIConfiguration _config;
 
-  protected virtual void Create(GameObject template)
+  private void Awake()
+  {
+    Create();
+  }
+
+  protected virtual void Create()
   {
     _element = gameObject;
 
     _element.SetActive(false);
   }
 
-  public virtual void Init(UIConfiguration configs)
+  public virtual void Init(UIKey key, UIConfiguration configs)
   {
-    _config = configs;
+    Key = key;
+
+    _config = configs ?? new UIConfiguration();
 
     if (_config.CacheType == CacheParametr.Cached)
       DontDestroyOnLoad(gameObject);
