@@ -23,9 +23,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
   public override void OnDisconnected(DisconnectCause cause) => base.OnDisconnected(cause);
 
-  public override void OnJoinedLobby() => base.OnJoinedLobby();
+  public override void OnJoinedLobby() =>
+    Debug.Log("Success goin to lobby");
 
-  public override void OnJoinedRoom() => base.OnJoinedRoom();
+  public override void OnJoinedRoom()
+  {
+    Debug.Log("Success goin to room");
+
+    PhotonNetwork.LoadLevel("Game");
+  }
 
   public void CreateRoom()
   {

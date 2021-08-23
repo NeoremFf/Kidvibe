@@ -1,38 +1,36 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace UI
 {
   public static class UIManager
   {
-    private static UIRootManager _root;
+    private static UIRootManager root;
 
-    private static bool _rootWasFinded = false;
+    private static bool _rootWasFunded = false;
 
-    private static List<UIElement> _activeUIElements;
-    private static List<UIElement> _cache;
+    private static readonly List<UIElement> ActiveUiElements;
+    private static readonly List<UIElement> Cache;
 
     static UIManager()
     {
-      _activeUIElements = new List<UIElement>();
-      _cache = new List<UIElement>();
+      ActiveUiElements = new List<UIElement>();
+      Cache = new List<UIElement>();
 
       FindRoot();
     }
 
     public static void Show(UIKey key, UITarget target = null)
     {
-      foreach (var item in _cache)
+      foreach (var item in Cache.Where(item => item.Key == key))
       {
-        if (item.Key == key)
-        {
-          if (item.HideOther)
-            HideOther(item.ForcedHideOther);
+        if (item.HideOther)
+          HideOther(item.ForcedHideOther);
 
-          item.Show();
+        item.Show();
 
-          return;
-        }
+        return;
       }
 
       ShowNew(key, target);
@@ -41,12 +39,12 @@ namespace UI
     public static void ShowNew(UIKey key, UITarget target = null,
       UIConfiguration configs = null)
     {
-      if (!_rootWasFinded)
+      if (!_rootWasFunded)
         FindRoot();
 
       var item = UIPool.Get(key);
 
-      var go = GameObject.Instantiate(item.prefab, _root.Canvas.transform);
+      var go = GameObject.Instantiate(item.prefab, root.Canvas.transform);
 
       var uiElement = go.GetComponent<UIElement>();
 
@@ -55,40 +53,35 @@ namespace UI
       if (uiElement.HideOther)
         HideOther(uiElement.ForcedHideOther);
 
-      _activeUIElements.Add(uiElement);
-      _cache.Add(uiElement);
+      ActiveUiElements.Add(uiElement);
+      Cache.Add(uiElement);
 
       uiElement.Show();
     }
 
-    static private void HideOther(bool force)
+    private static void HideOther(bool force)
     {
-      if (true)
+      foreach (var element in ActiveUiElements)
       {
-        foreach (var element in _activeUIElements)
-        {
-          if (element.NeverHide)
-            if (!force)
-              continue;
+        if (element.NeverHide)
+          if (!force)
+            continue;
 
-          if (element.NeedRemoveFromCache)
-            _cache.Remove(element);
+        if (element.NeedRemoveFromCache)
+          Cache.Remove(element);
 
-          element.Hide();
-        }
+        element.Hide();
       }
     }
 
-    static private UIRootManager FindRoot()
+    private static void FindRoot()
     {
-      _root = MonoBehaviour.FindObjectOfType<UIRootManager>();
+      root = Object.FindObjectOfType<UIRootManager>();
 
-      if (_root == null)
+      if (root == null)
         throw new System.NullReferenceException("Can not to find root for ui (UIRootManager).");
 
-      _rootWasFinded = true;
-
-      return _root;
+      _rootWasFunded = true;
     }
   }
 }
