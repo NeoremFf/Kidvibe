@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Entitas;
+using UnityEngine;
 
 namespace Kidvibe.Assets.ECS.Components.Player
 {
-  public struct DashableComponent
+  public class DashableComponent : IComponent
   {
     public Rigidbody2D rigidbody;
     public int power;

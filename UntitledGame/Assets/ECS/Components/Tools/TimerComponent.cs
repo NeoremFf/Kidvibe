@@ -1,6 +1,8 @@
-﻿namespace Kidvibe.Assets.ECS.Components.Tools
+﻿using Entitas;
+
+namespace Kidvibe.Assets.ECS.Components.Tools
 {
-  public struct TimerComponent
+  public class TimerComponent : IComponent
   {
     public float timeLeft;
     public bool isRun;

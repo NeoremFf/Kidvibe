@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Entitas;
+using UnityEngine;
 
-public struct MovableComponent
+public class MovableComponent : IComponent
 {
   public Rigidbody2D rigidbody;
   public float speed;
