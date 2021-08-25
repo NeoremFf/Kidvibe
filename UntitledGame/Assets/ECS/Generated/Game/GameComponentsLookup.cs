@@ -8,24 +8,39 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int KidvibeAssetsECSComponentsInput = 0;
-    public const int KidvibeAssetsECSComponentsPlayerDashable = 1;
-    public const int KidvibeAssetsECSComponentsToolsTimer = 2;
-    public const int Movable = 3;
+    public const int CdDash = 0;
+    public const int Dashable = 1;
+    public const int Dash = 2;
+    public const int Input = 3;
+    public const int Move = 4;
+    public const int Rigidbody = 5;
+    public const int State = 6;
+    public const int Cd = 7;
+    public const int Timer = 8;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
-        "KidvibeAssetsECSComponentsInput",
-        "KidvibeAssetsECSComponentsPlayerDashable",
-        "KidvibeAssetsECSComponentsToolsTimer",
-        "Movable"
+        "CdDash",
+        "Dashable",
+        "Dash",
+        "Input",
+        "Move",
+        "Rigidbody",
+        "State",
+        "Cd",
+        "Timer"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Kidvibe.Assets.ECS.Components.InputComponent),
-        typeof(Kidvibe.Assets.ECS.Components.Player.DashableComponent),
-        typeof(Kidvibe.Assets.ECS.Components.Tools.TimerComponent),
-        typeof(MovableComponent)
+        typeof(Kidvibe.Assets.ECS.Components.Player.Dash.CdDashComponent),
+        typeof(Kidvibe.Assets.ECS.Components.Player.Dash.DashableComponent),
+        typeof(Kidvibe.Assets.ECS.Components.Player.Dash.DashComponent),
+        typeof(Kidvibe.Assets.ECS.Components.Player.InputComponent),
+        typeof(Kidvibe.Assets.ECS.Components.Player.MoveComponent),
+        typeof(Kidvibe.Assets.ECS.Components.Player.Physic.RigidbodyComponent),
+        typeof(Kidvibe.Assets.ECS.Components.Player.State.StateComponent),
+        typeof(Kidvibe.Assets.ECS.Components.Tools.CdComponent),
+        typeof(Kidvibe.Assets.ECS.Components.Tools.TimerComponent)
     };
 }

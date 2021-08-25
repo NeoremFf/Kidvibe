@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using UnityEngine;
 
-namespace Kidvibe.Assets.ECS.Components
+namespace Kidvibe.Assets.ECS.Components.Player
 {
   public class InputComponent : IComponent
   {
