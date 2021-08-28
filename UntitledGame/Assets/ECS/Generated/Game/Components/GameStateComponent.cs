@@ -11,17 +11,17 @@ public partial class GameEntity {
     public Kidvibe.Assets.ECS.Components.Player.State.StateComponent state { get { return (Kidvibe.Assets.ECS.Components.Player.State.StateComponent)GetComponent(GameComponentsLookup.State); } }
     public bool hasState { get { return HasComponent(GameComponentsLookup.State); } }
 
-    public void AddState(Kidvibe.Assets.ECS.Components.Player.State.PlayerStateCore newStateCore) {
+    public void AddState(Kidvibe.Assets.ECS.Components.Player.State.PlayerStateCore newState) {
         var index = GameComponentsLookup.State;
         var component = (Kidvibe.Assets.ECS.Components.Player.State.StateComponent)CreateComponent(index, typeof(Kidvibe.Assets.ECS.Components.Player.State.StateComponent));
-        component.stateCore = newStateCore;
+        component.state = newState;
         AddComponent(index, component);
     }
 
-    public void ReplaceState(Kidvibe.Assets.ECS.Components.Player.State.PlayerStateCore newStateCore) {
+    public void ReplaceState(Kidvibe.Assets.ECS.Components.Player.State.PlayerStateCore newState) {
         var index = GameComponentsLookup.State;
         var component = (Kidvibe.Assets.ECS.Components.Player.State.StateComponent)CreateComponent(index, typeof(Kidvibe.Assets.ECS.Components.Player.State.StateComponent));
-        component.stateCore = newStateCore;
+        component.state = newState;
         ReplaceComponent(index, component);
     }
 

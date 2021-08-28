@@ -33,10 +33,13 @@ namespace Kidvibe.Assets.ECS.Bootstrap
   {
     public MainGameFeatures(GameContext context, DiContainer diContainer)
     {
-      Add(diContainer.Instantiate<CdSystem>());
-      Add(new InputSystem(context));
-      Add(new PlayerStateSystem(context));
-      Add(new MovePlayerSystem(context));
+      Add(diContainer.Instantiate<InputSystem>());
+      Add(diContainer.Instantiate<MoveablePlayerSystem>());
+      Add(diContainer.Instantiate<MovePlayerSystem>());
+      Add(diContainer.Instantiate<DashableSystem>());
+      Add(diContainer.Instantiate<DashSystem>());
+      Add(diContainer.Instantiate<PlayerStateSystem>());
+      Add(diContainer.Instantiate<TimersSystem>());
     }
   }
 }

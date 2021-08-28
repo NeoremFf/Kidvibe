@@ -2,7 +2,9 @@
 
 namespace Kidvibe.Assets.ECS.Components.Player
 {
-  public class MoveComponent : IComponent
-  {
-  }
+  public class MovableComponent : IComponent { }
+
+  public class WalkComponent : IComponent { public float speed; }
+
+  public class RunComponent : IComponent { public float speed; }
 }

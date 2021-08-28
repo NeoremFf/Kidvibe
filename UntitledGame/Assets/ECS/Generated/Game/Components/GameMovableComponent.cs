@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Kidvibe.Assets.ECS.Components.Player.MoveComponent moveComponent = new Kidvibe.Assets.ECS.Components.Player.MoveComponent();
+    static readonly Kidvibe.Assets.ECS.Components.Player.MovableComponent movableComponent = new Kidvibe.Assets.ECS.Components.Player.MovableComponent();
 
-    public bool isMove {
-        get { return HasComponent(GameComponentsLookup.Move); }
+    public bool isMovable {
+        get { return HasComponent(GameComponentsLookup.Movable); }
         set {
-            if (value != isMove) {
-                var index = GameComponentsLookup.Move;
+            if (value != isMovable) {
+                var index = GameComponentsLookup.Movable;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : moveComponent;
+                            : movableComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherMove;
+    static Entitas.IMatcher<GameEntity> _matcherMovable;
 
-    public static Entitas.IMatcher<GameEntity> Move {
+    public static Entitas.IMatcher<GameEntity> Movable {
         get {
-            if (_matcherMove == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Move);
+            if (_matcherMovable == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Movable);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherMove = matcher;
+                _matcherMovable = matcher;
             }
 
-            return _matcherMove;
+            return _matcherMovable;
         }
     }
 }

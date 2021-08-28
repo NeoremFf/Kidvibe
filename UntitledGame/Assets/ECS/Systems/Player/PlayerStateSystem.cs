@@ -1,25 +1,26 @@
 ﻿using Entitas;
 using Kidvibe.Assets.ECS.Components.Player.State;
+using UnityEngine;
 
 namespace Kidvibe.Assets.ECS.Systems.Player
 {
   public class PlayerStateSystem : IExecuteSystem
   {
-    private readonly IGroup<GameEntity> _states;
+    private readonly IGroup<GameEntity> States;
 
     public PlayerStateSystem(GameContext context)
     {
-      _states = context.GetGroup(
+      States = context.GetGroup(
         GameMatcher.AllOf(GameMatcher.State,
-          GameMatcher.Rigidbody,
           GameMatcher.Input));
     }
 
     public void Execute()
     {
-      foreach (var entity in _states)
+      foreach (var entity in States)
       {
-        entity.state.stateCore.Set<InactiveState>(entity);
+        if (entity.input.direction == Vector2.zero)
+          entity.state.state.Set<IdleState>(entity);
       }
     }
   }
