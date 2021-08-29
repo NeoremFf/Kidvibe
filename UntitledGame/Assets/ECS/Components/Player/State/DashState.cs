@@ -1,16 +1,23 @@
-﻿namespace Kidvibe.Assets.ECS.Components.Player.State
+﻿using Kidvibe.Assets.GameData.Static.Configs.Player;
+using Zenject;
+
+namespace Kidvibe.Assets.ECS.Components.Player.State
 {
   public class DashState : PlayerState
   {
-    public override void OnAdd(GameEntity entity)
+    [Inject] private readonly PlayerDashConfigs DashConfigs;
+
+    public override void OnAdd()
     {
-      Logger.Log("Create " + nameof(DashState));
-      // entity.AddDash(); TODO
+      Logger.Log("Set " + nameof(DashState));
+      
+      entity.AddDash(DashConfigs.Power);
     }
 
-    public override void OnRemove(GameEntity entity)
+    public override void OnRemove()
     {
       Logger.Log("Remove " + nameof(DashState));
+
       entity.RemoveDash();
     }
   }

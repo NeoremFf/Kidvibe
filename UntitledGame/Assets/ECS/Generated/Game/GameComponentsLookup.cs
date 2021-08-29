@@ -33,7 +33,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Kidvibe.Assets.ECS.Components.Game.TimersComponent),
+        typeof(Kidvibe.Assets.ECS.Components.Game.Timer.TimersComponent),
         typeof(Kidvibe.Assets.ECS.Components.Player.Dash.DashableComponent),
         typeof(Kidvibe.Assets.ECS.Components.Player.Dash.DashComponent),
         typeof(Kidvibe.Assets.ECS.Components.Player.InputComponent),

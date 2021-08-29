@@ -4,6 +4,6 @@ namespace Kidvibe.Assets.ECS.Components.Player.State
 {
   public class StateComponent : IComponent
   {
-    public PlayerStateCore state;
+    public PlayerStateCore currentState;
   }
 }

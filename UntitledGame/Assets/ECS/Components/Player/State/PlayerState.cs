@@ -20,25 +20,31 @@ namespace Kidvibe.Assets.ECS.Components.Player.State
         [typeof(IdleState)] = diContainer.Instantiate<IdleState>(),
         [typeof(WalkState)] = diContainer.Instantiate<WalkState>(),
         [typeof(RunState)] = diContainer.Instantiate<RunState>(),
+        [typeof(DashState)] = diContainer.Instantiate<DashState>(),
         [typeof(InactiveState)] = diContainer.Instantiate<InactiveState>()
       };
     }
 
     public void Init(GameEntity entity)
     {
+      foreach (var state in _statesPool)
+      {
+        state.Value.Init(entity);
+      }
+
       _state = _statesPool[typeof(IdleState)];
-      _state.OnAdd(entity);
+      _state.OnAdd();
     }
 
-    public void Set<T>(GameEntity entity)
+    public void Set<T>()
       where T : PlayerState
     {
       _newState = _statesPool[typeof(T)];
 
       if (_newState == _state) return;
 
-      _state.OnRemove(entity);
-      _newState.OnAdd(entity);
+      _state.OnRemove();
+      _newState.OnAdd();
       _state = _newState;
     }
   }
@@ -47,7 +53,14 @@ namespace Kidvibe.Assets.ECS.Components.Player.State
   {
     [Inject] protected readonly ILogger Logger;
 
-    public abstract void OnAdd(GameEntity entity);
-    public abstract void OnRemove(GameEntity entity);
+    protected GameEntity entity;
+
+    public void Init(GameEntity entity)
+    {
+      this.entity = entity;
+    }
+
+    public abstract void OnAdd();
+    public abstract void OnRemove();
   }
 }

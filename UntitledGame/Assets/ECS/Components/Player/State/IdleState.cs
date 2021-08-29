@@ -1,17 +1,19 @@
-﻿
-using UnityEngine;
-
-namespace Kidvibe.Assets.ECS.Components.Player.State
+﻿namespace Kidvibe.Assets.ECS.Components.Player.State
 {
   public class IdleState : PlayerState
   {
-    public override void OnAdd(GameEntity entity)
+    public override void OnAdd()
     {
       entity.isMovable = true;
 
-      Debug.Log("Add movable");
+      Logger.Log("Add movable");
     }
 
-    public override void OnRemove(GameEntity entity) { }
+    public override void OnRemove()
+    {
+      entity.isMovable = false;
+      
+      Logger.Log("Remove movable");
+    }
   }
 }

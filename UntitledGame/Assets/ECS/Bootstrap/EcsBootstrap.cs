@@ -1,6 +1,6 @@
-﻿using Kidvibe.Assets.ECS.Systems.Inputs;
+﻿using Kidvibe.Assets.ECS.Systems.Game.Timer;
+using Kidvibe.Assets.ECS.Systems.Inputs;
 using Kidvibe.Assets.ECS.Systems.Player;
-using Kidvibe.Assets.ECS.Systems.Tools;
 using UnityEngine;
 using Zenject;
 
@@ -33,12 +33,11 @@ namespace Kidvibe.Assets.ECS.Bootstrap
   {
     public MainGameFeatures(GameContext context, DiContainer diContainer)
     {
-      Add(diContainer.Instantiate<InputSystem>());
+      Add(diContainer.Instantiate<GameInputSystem>());
       Add(diContainer.Instantiate<MoveablePlayerSystem>());
       Add(diContainer.Instantiate<MovePlayerSystem>());
       Add(diContainer.Instantiate<DashableSystem>());
       Add(diContainer.Instantiate<DashSystem>());
-      Add(diContainer.Instantiate<PlayerStateSystem>());
       Add(diContainer.Instantiate<TimersSystem>());
     }
   }

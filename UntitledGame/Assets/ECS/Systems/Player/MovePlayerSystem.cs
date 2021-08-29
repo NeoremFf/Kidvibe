@@ -1,7 +1,8 @@
 ﻿using Entitas;
-using Kidvibe.Assets.GameData.Static.Configs.Player;
+using Kidvibe.Assets.ECS.Components.Player.State;
 using UnityEngine;
 using Zenject;
+using ILogger = Kidvibe.Assets.Utils.ILogger;
 
 namespace Kidvibe.Assets.ECS.Systems.Player
 {
@@ -10,12 +11,14 @@ namespace Kidvibe.Assets.ECS.Systems.Player
     private readonly IGroup<GameEntity> Inputs;
     private readonly IGroup<GameEntity> MoveType;
 
+    [Inject] private readonly ILogger Logger;
+
     public MovePlayerSystem(GameContext context)
     {
       Inputs = context.GetGroup(
         GameMatcher.AllOf(GameMatcher.Input,
           GameMatcher.Rigidbody,
-          GameMatcher.Movable));
+          GameMatcher.State));
       MoveType = context.GetGroup(
         GameMatcher.AnyOf(GameMatcher.Walk,
           GameMatcher.Run));
@@ -24,11 +27,19 @@ namespace Kidvibe.Assets.ECS.Systems.Player
     public void Execute()
     {
       foreach (var entity in Inputs)
-      foreach (var moveType in MoveType)
+      foreach (var moveType in MoveType.GetEntities())
       {
-        Debug.Log("Walk");
+        Logger.Log("Walk");
 
         var speed = moveType.hasWalk ? moveType.walk.speed : moveType.run.speed;
+
+        var direction = entity.input.direction;
+
+        if (direction == Vector2.zero)
+          entity.state.currentState.Set<IdleState>();
+
+        // todo add check that user wish run or walk
+
         entity.rigidbody.rigidbody.velocity = entity.input.direction * speed;
       }
     }
@@ -38,29 +49,25 @@ namespace Kidvibe.Assets.ECS.Systems.Player
   {
     private readonly IGroup<GameEntity> Moveable;
 
-    [Inject] private readonly PlayerMovementConfigs Configs;
+    [Inject] private readonly ILogger Logger;
 
     public MoveablePlayerSystem(GameContext context)
     {
       Moveable = context.GetGroup(
         GameMatcher.AllOf(GameMatcher.Input,
-          GameMatcher.Movable));
+          GameMatcher.Movable,
+          GameMatcher.State));
     }
 
     public void Execute()
     {
-      foreach (var entity in Moveable)
+      foreach (var entity in Moveable.GetEntities())
       {
-        if (!entity.isMovable
-            || entity.hasWalk
-            || entity.hasRun)
-          continue;
-        
         if (entity.input.direction != Vector2.zero)
         {
-          entity.AddWalk(Configs.WalkSpeed);
+          entity.state.currentState.Set<WalkState>();
 
-          Debug.Log("Set walk");
+          Logger.Log("Set walk");
         }
       }
     }

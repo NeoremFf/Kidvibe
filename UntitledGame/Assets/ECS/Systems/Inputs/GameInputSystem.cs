@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Kidvibe.Assets.ECS.Systems.Inputs
 {
-  public class InputSystem : IExecuteSystem
+  public class GameInputSystem : IExecuteSystem
   {
     private readonly IGroup<GameEntity> Inputs;
 
-    public InputSystem(GameContext context)
+    public GameInputSystem(GameContext context)
     {
       Inputs = context.GetGroup(
-        GameMatcher.AllOf(GameMatcher.Input));
+        GameMatcher.Input);
     }
 
     public void Execute()

@@ -6,16 +6,16 @@ namespace Kidvibe.Assets.ECS.Components.Player.State
   public class RunState : PlayerState
   {
     [Inject] private readonly PlayerMovementConfigs MovementConfigs;
+    [Inject] private readonly PlayerDashConfigs DashConfigs;
 
-    public override void OnAdd(GameEntity entity)
+    public override void OnAdd()
     {
       entity.AddRun(MovementConfigs.WalkSpeed);
       entity.ReplaceRun(MovementConfigs.RunSpeed);
-      entity.ReplaceDash(MovementConfigs.DashConfigs.Power,
-        MovementConfigs.DashConfigs.Duration);
+      entity.ReplaceDash(DashConfigs.Power);
     }
 
-    public override void OnRemove(GameEntity entity)
+    public override void OnRemove()
     {
       entity.RemoveRun();
     }

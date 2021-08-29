@@ -11,19 +11,17 @@ public partial class GameEntity {
     public Kidvibe.Assets.ECS.Components.Player.Dash.DashComponent dash { get { return (Kidvibe.Assets.ECS.Components.Player.Dash.DashComponent)GetComponent(GameComponentsLookup.Dash); } }
     public bool hasDash { get { return HasComponent(GameComponentsLookup.Dash); } }
 
-    public void AddDash(float newPower, float newDuration) {
+    public void AddDash(float newPower) {
         var index = GameComponentsLookup.Dash;
         var component = (Kidvibe.Assets.ECS.Components.Player.Dash.DashComponent)CreateComponent(index, typeof(Kidvibe.Assets.ECS.Components.Player.Dash.DashComponent));
         component.power = newPower;
-        component.duration = newDuration;
         AddComponent(index, component);
     }
 
-    public void ReplaceDash(float newPower, float newDuration) {
+    public void ReplaceDash(float newPower) {
         var index = GameComponentsLookup.Dash;
         var component = (Kidvibe.Assets.ECS.Components.Player.Dash.DashComponent)CreateComponent(index, typeof(Kidvibe.Assets.ECS.Components.Player.Dash.DashComponent));
         component.power = newPower;
-        component.duration = newDuration;
         ReplaceComponent(index, component);
     }
 

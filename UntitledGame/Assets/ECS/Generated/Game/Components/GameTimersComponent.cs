@@ -8,20 +8,24 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Kidvibe.Assets.ECS.Components.Game.TimersComponent timers { get { return (Kidvibe.Assets.ECS.Components.Game.TimersComponent)GetComponent(GameComponentsLookup.Timers); } }
+    public Kidvibe.Assets.ECS.Components.Game.Timer.TimersComponent timers { get { return (Kidvibe.Assets.ECS.Components.Game.Timer.TimersComponent)GetComponent(GameComponentsLookup.Timers); } }
     public bool hasTimers { get { return HasComponent(GameComponentsLookup.Timers); } }
 
-    public void AddTimers(System.Collections.Generic.List<Kidvibe.Assets.ECS.Components.Game.TimerBody> newBodies) {
+    public void AddTimers(System.Collections.Generic.List<Kidvibe.Assets.ECS.Components.Game.Timer.TimerBody> newBodies, Kidvibe.Assets.ECS.Components.Game.Timer.TimerPool newPool, GameEntity newEntity) {
         var index = GameComponentsLookup.Timers;
-        var component = (Kidvibe.Assets.ECS.Components.Game.TimersComponent)CreateComponent(index, typeof(Kidvibe.Assets.ECS.Components.Game.TimersComponent));
+        var component = (Kidvibe.Assets.ECS.Components.Game.Timer.TimersComponent)CreateComponent(index, typeof(Kidvibe.Assets.ECS.Components.Game.Timer.TimersComponent));
         component.bodies = newBodies;
+        component.pool = newPool;
+        component.entity = newEntity;
         AddComponent(index, component);
     }
 
-    public void ReplaceTimers(System.Collections.Generic.List<Kidvibe.Assets.ECS.Components.Game.TimerBody> newBodies) {
+    public void ReplaceTimers(System.Collections.Generic.List<Kidvibe.Assets.ECS.Components.Game.Timer.TimerBody> newBodies, Kidvibe.Assets.ECS.Components.Game.Timer.TimerPool newPool, GameEntity newEntity) {
         var index = GameComponentsLookup.Timers;
-        var component = (Kidvibe.Assets.ECS.Components.Game.TimersComponent)CreateComponent(index, typeof(Kidvibe.Assets.ECS.Components.Game.TimersComponent));
+        var component = (Kidvibe.Assets.ECS.Components.Game.Timer.TimersComponent)CreateComponent(index, typeof(Kidvibe.Assets.ECS.Components.Game.Timer.TimersComponent));
         component.bodies = newBodies;
+        component.pool = newPool;
+        component.entity = newEntity;
         ReplaceComponent(index, component);
     }
 

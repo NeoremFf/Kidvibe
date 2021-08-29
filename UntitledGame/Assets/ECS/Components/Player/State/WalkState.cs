@@ -7,17 +7,20 @@ namespace Kidvibe.Assets.ECS.Components.Player.State
   {
     [Inject] private readonly PlayerMovementConfigs MovementConfigs;
 
-    public override void OnAdd(GameEntity entity)
+    public override void OnAdd()
     {
       entity.AddWalk(MovementConfigs.WalkSpeed);
-      entity.ReplaceRun(MovementConfigs.RunSpeed);
-      entity.ReplaceDash(MovementConfigs.DashConfigs.Power, 
-        MovementConfigs.DashConfigs.Duration);
+      entity.isDashable = true;
+
+      Logger.Log("Add walk state");
     }
 
-    public override void OnRemove(GameEntity entity)
+    public override void OnRemove()
     {
       entity.RemoveWalk();
+      entity.isDashable = false;
+
+      Logger.Log("Remove walk state");
     }
   }
 }

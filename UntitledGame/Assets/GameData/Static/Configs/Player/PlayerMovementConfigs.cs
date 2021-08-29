@@ -7,7 +7,6 @@ namespace Kidvibe.Assets.GameData.Static.Configs.Player
   {
     public float WalkSpeed { get; set; } = 20;
     public float RunSpeed { get; set; } = 40;
-    public PlayerDashConfigs DashConfigs { get; set; }
   }
 
   [Serializable]
