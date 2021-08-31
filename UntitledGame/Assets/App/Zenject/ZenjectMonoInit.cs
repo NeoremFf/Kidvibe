@@ -15,10 +15,13 @@ namespace Kidvibe.Assets.App.Zenject
     public override void InstallBindings()
     {
       Container.Bind<ILogger>().To<Logger>().AsSingle();
+
       Container.Bind<PlayerMovementConfigs>().AsSingle();
       Container.Bind<PlayerDashConfigs>().AsSingle();
       Container.Bind<PlayerStateCore>().AsSingle();
-      Container.Bind<PlayerTimerPool>().FromMethod(TimePoolsConfig.PlayerTimerPool).AsSingle();
+
+      Container.Bind<ITimerPool>().WithId("Player").To<PlayerTimerPool>().AsSingle();
+
       Container.Bind<GameContext>().FromInstance(Contexts.sharedInstance.game).AsSingle();
     }
   }

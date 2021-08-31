@@ -2,21 +2,20 @@
 using Kidvibe.Assets.ECS.Components.Game.Timer;
 using Kidvibe.Assets.ECS.Components.Game.Timer.Pools;
 using Kidvibe.Assets.ECS.Components.Player.State;
-using Kidvibe.Test;
 using UnityEngine;
 using Zenject;
 
 namespace Kidvibe.Assets.ECS.Bootstrap.Player
 {
-  public class PlayerEntityInit : MonoBehaviour
+  public class EcsPlayerEntity : MonoBehaviour
   {
     [Inject] private readonly PlayerStateCore PlayerState;
-    [Inject] private readonly PlayerTimerPool TimersPool;
+    [Inject(Id = "Player")] private readonly ITimerPool TimersPool;
 
-    private void Start()
+    private void Awake()
     {
       var player = Contexts.sharedInstance.game.CreateEntity();
-      var rb = PlayerDataStorage.player.GetComponentInChildren<Rigidbody2D>();
+      var rb = gameObject.GetComponentInChildren<Rigidbody2D>();
 
       player.AddInput(Vector2.zero, false);
       player.AddState(PlayerState);

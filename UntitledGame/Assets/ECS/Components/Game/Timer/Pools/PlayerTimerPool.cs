@@ -1,11 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using Kidvibe.Assets.ECS.Components.Game.Timer.Bodies;
+using Zenject;
 
 namespace Kidvibe.Assets.ECS.Components.Game.Timer.Pools
 {
-  public class PlayerTimerPool : TimerPool
+  public class PlayerTimerPool : ITimerPool
   {
-    public PlayerTimerPool(Dictionary<Type, TimerBody> pool) : base(pool)
-    { }
+    public IReadOnlyCollection<TimerBody> Bodies => Pool.Values;
+
+    public Dictionary<Type, TimerBody> Pool { get; private set; }
+
+    [Inject]
+    public PlayerTimerPool(DiContainer di)
+    {
+      Pool = new Dictionary<Type, TimerBody>()
+      {
+         [typeof(TimerBodyDashDuration)] = di.Instantiate<TimerBodyDashDuration>(),
+      };
+    }
+
+    public TimerBody GetBy<TBodyType>() where TBodyType : TimerBody
+    {
+      var timer = Pool[typeof(TBodyType)];
+      return timer;
+    }
   }
 }

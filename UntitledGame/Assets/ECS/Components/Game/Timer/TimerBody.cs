@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Kidvibe.Assets.Utils;
+﻿using Kidvibe.Assets.Utils;
 using Zenject;
 
 namespace Kidvibe.Assets.ECS.Components.Game.Timer
@@ -13,9 +12,10 @@ namespace Kidvibe.Assets.ECS.Components.Game.Timer
 
     protected GameEntity entity;
 
-    public TimerBody(GameEntity entity)
+    public TimerBody Init(GameEntity entity)
     {
-      this.entity = entity; 
+      this.entity = entity;
+      return this;
     }
 
     public abstract void Run();

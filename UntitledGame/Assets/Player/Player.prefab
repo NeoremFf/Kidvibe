@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 307340357176940153}
-  - component: {fileID: 307340357176940152}
+  - component: {fileID: 7214169760532259870}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -114,22 +114,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &307340357176940152
+--- !u!114 &7214169760532259870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307340357176940154}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd10b24237c4ee64e91b272981ec041a, type: 3}
+  m_Script: {fileID: 11500000, guid: f40ae4ac35fc6fd4e9f3053b9c1dfc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 40
-  _dashPower: 13000
-  _dashCd: 1
-  _dashDuration: 0.1
 --- !u!1 &307340357903224962
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,10 +9,6 @@ namespace Kidvibe.Assets.ECS.Components.Game.Timer.Bodies
   {
     [Inject] private readonly PlayerDashConfigs Configs;
 
-    public TimerBodyDashDuration(GameEntity entity) : base(entity)
-    {
-    }
-
     public override void Run()
     {
       base.Run(Configs.Duration);
