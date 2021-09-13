@@ -1,15 +1,15 @@
 ﻿using Kidvibe.Assets.Utils;
 using Zenject;
 
-namespace Kidvibe.ECS.Components.Game.Timer
+namespace Kidvibe.GameLogic.Timer
 {
   public abstract class TimerBody
   {
     [Inject] protected readonly ILogger logger;
 
     private bool _isPause;
-
     private bool _isRun;
+
     private float _time;
 
     protected GameEntity entity;
@@ -22,9 +22,9 @@ namespace Kidvibe.ECS.Components.Game.Timer
 
     public abstract void Run();
 
-    public void Run(float startTime)
+    protected void Run(float startTime)
     {
-      logger.Log($"Timer is run in {startTime} seconds!");
+      logger.Log($"<color=blue>[TIMER]</color> is running in {startTime} seconds");
 
       _time = startTime;
       _isRun = true;
@@ -41,11 +41,15 @@ namespace Kidvibe.ECS.Components.Game.Timer
       _time -= timeLeft;
 
       if (_time <= 0)
+      {
         OnExpired();
+      }
     }
 
     protected virtual void OnExpired()
     {
+      logger.Log("<color=blue>[TIMER]</color> has been expired");
+
       _isRun = false;
     }
   }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Kidvibe.GameLogic.Timer;
 
-namespace Kidvibe.ECS.Components.Game.Timer.Pools
+namespace Kidvibe.Game.Timer.Pools
 {
   public interface ITimerPool
   {

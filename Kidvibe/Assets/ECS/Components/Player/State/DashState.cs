@@ -1,5 +1,6 @@
 ﻿using Kidvibe.ECS.Components.Player.State.Core;
 using Kidvibe.GameData.Static.Configs.Player;
+using Kidvibe.GameLogic.Timer.Bodies;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +16,11 @@ namespace Kidvibe.ECS.Components.Player.State
     {
       logger.Log("Set " + nameof(DashState));
       
+      entity.dashCharges.Remove();
+      entity.timers.SetWhitDelay<TimerBodyDashChargeRefresh>();
+      
       entity.AddDash(_dashConfigs.Power, _direction);
+      entity.timers.Set<TimerBodyDashDuration>();
     }
 
     public override void OnAdd(object data)

@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using Kidvibe.Assets.Utils;
-using Kidvibe.ECS.Components.Game.Timer.Bodies;
 using Kidvibe.ECS.Components.Player.State;
+using Kidvibe.GameLogic.Timer.Bodies;
 using Zenject;
 
 namespace Kidvibe.ECS.Systems.Player
@@ -9,9 +9,7 @@ namespace Kidvibe.ECS.Systems.Player
   public class DashSystem : IExecuteSystem
   {
     private readonly IGroup<GameEntity> _dashes;
-
-    [Inject] private readonly ILogger _logger;
-
+    
     public DashSystem(GameContext context)
     {
       _dashes = context.GetGroup(
@@ -24,8 +22,6 @@ namespace Kidvibe.ECS.Systems.Player
       foreach (var entity in _dashes)
       {
         entity.rigidbody.rigidbody.velocity = entity.dash.direction * entity.dash.power;
-
-        _logger.Log("Dash is run!");
       }
     }
   }
@@ -39,9 +35,9 @@ namespace Kidvibe.ECS.Systems.Player
     public DashableSystem(GameContext context)
     {
       _dashable = context.GetGroup(
-        GameMatcher.AllOf(
-          GameMatcher.Input,
+        GameMatcher.AllOf(GameMatcher.Input,
           GameMatcher.Dashable,
+          GameMatcher.DashCharges,
           GameMatcher.State,
           GameMatcher.Timers));
     }
@@ -50,12 +46,12 @@ namespace Kidvibe.ECS.Systems.Player
     {
       foreach (var entity in _dashable.GetEntities())
       {
-        if (entity.input.dash)
+        if (entity.input.dash && entity.dashCharges.count > 0)
         {
           entity.state.currentState.Set<DashState>(entity.input.direction);
-          entity.timers.Set<TimerBodyDashDuration>();
 
-          _logger.Log("Set Dash");
+          _logger.TemporaryDebug("<color=red>Remove</color>");
+          _logger.TemporaryDebug($"Current count of charges: {entity.dashCharges.count}");
         }
       }
     }

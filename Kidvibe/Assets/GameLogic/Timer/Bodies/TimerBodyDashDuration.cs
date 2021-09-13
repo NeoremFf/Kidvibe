@@ -3,7 +3,7 @@ using Kidvibe.ECS.Components.Player.State;
 using Kidvibe.GameData.Static.Configs.Player;
 using Zenject;
 
-namespace Kidvibe.ECS.Components.Game.Timer.Bodies
+namespace Kidvibe.GameLogic.Timer.Bodies
 {
   public class TimerBodyDashDuration : TimerBody
   {
@@ -18,11 +18,11 @@ namespace Kidvibe.ECS.Components.Game.Timer.Bodies
     {
       base.OnExpired();
 
-      logger.Log("Dash Duration has been expired!");
+      logger.Log($"<color=blue>[TIMER]</color> {nameof(TimerBodyDashDuration)} has been expired!");
 
       if (!entity.hasState)
       {
-        logger.LogErrorWithMessage(new EcsComponentMissingException(nameof(StateComponent)),
+        logger.ErrorWithMessage(new EcsComponentMissingException(nameof(StateComponent)),
           $"Missing {nameof(StateComponent)} component in {nameof(TimerBodyDashDuration)}");
 
         return;

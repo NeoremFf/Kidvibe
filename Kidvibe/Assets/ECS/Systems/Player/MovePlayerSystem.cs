@@ -1,19 +1,14 @@
-﻿using System.Data;
-using Entitas;
+﻿using Entitas;
 using Kidvibe.ECS.Components.Player.State;
 using UnityEngine;
-using Zenject;
-using ILogger = Kidvibe.Assets.Utils.ILogger;
 
-namespace Kidvibe.Assets.ECS.Systems.Player
+namespace Kidvibe.ECS.Systems.Player
 {
   public class MovePlayerSystem : IExecuteSystem
   {
     private readonly IGroup<GameEntity> Inputs;
     private readonly IGroup<GameEntity> MoveType;
-
-    [Inject] private readonly ILogger Logger;
-
+    
     public MovePlayerSystem(GameContext context)
     {
       Inputs = context.GetGroup(
@@ -30,18 +25,18 @@ namespace Kidvibe.Assets.ECS.Systems.Player
       foreach (var entity in Inputs)
       foreach (var moveType in MoveType.GetEntities())
       {
-        Logger.Log("Walk");
+        if (entity.input.walk)
+          entity.state.currentState.Set<WalkState>();
+        else
+          entity.state.currentState.Set<RunState>();
 
         var speed = moveType.hasWalk ? moveType.walk.speed : moveType.run.speed;
-
         var direction = entity.input.direction;
 
+        entity.rigidbody.rigidbody.velocity = entity.input.direction * speed;
+        
         if (direction == Vector2.zero)
           entity.state.currentState.Set<IdleState>();
-
-        // todo add check that user wish run or walk
-
-        entity.rigidbody.rigidbody.velocity = entity.input.direction * speed;
       }
     }
   }
@@ -49,9 +44,7 @@ namespace Kidvibe.Assets.ECS.Systems.Player
   public class MoveablePlayerSystem : IExecuteSystem
   {
     private readonly IGroup<GameEntity> _moveable;
-
-    [Inject] private readonly ILogger _logger;
-
+    
     public MoveablePlayerSystem(GameContext context)
     {
       _moveable = context.GetGroup(
@@ -67,12 +60,13 @@ namespace Kidvibe.Assets.ECS.Systems.Player
       {
         if (entity.input.direction != Vector2.zero)
         {
-          entity.state.currentState.Set<WalkState>();
-
-          _logger.Log("Set walk");
+          if (entity.input.walk)
+            entity.state.currentState.Set<WalkState>();
+          else
+            entity.state.currentState.Set<RunState>();
         }
 
-        entity.rigidbody.rigidbody.velocity = Vector2.zero;
+        entity.rigidbody.rigidbody.velocity = Vector2.zero; // for reset velocity after dash
       }
     }
   }

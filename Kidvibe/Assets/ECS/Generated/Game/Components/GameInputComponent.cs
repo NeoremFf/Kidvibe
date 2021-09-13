@@ -11,18 +11,20 @@ public partial class GameEntity {
     public Kidvibe.ECS.Components.Player.InputComponent input { get { return (Kidvibe.ECS.Components.Player.InputComponent)GetComponent(GameComponentsLookup.Input); } }
     public bool hasInput { get { return HasComponent(GameComponentsLookup.Input); } }
 
-    public void AddInput(UnityEngine.Vector2 newDirection, bool newDash) {
+    public void AddInput(UnityEngine.Vector2 newDirection, bool newWalk, bool newDash) {
         var index = GameComponentsLookup.Input;
         var component = (Kidvibe.ECS.Components.Player.InputComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Player.InputComponent));
         component.direction = newDirection;
+        component.walk = newWalk;
         component.dash = newDash;
         AddComponent(index, component);
     }
 
-    public void ReplaceInput(UnityEngine.Vector2 newDirection, bool newDash) {
+    public void ReplaceInput(UnityEngine.Vector2 newDirection, bool newWalk, bool newDash) {
         var index = GameComponentsLookup.Input;
         var component = (Kidvibe.ECS.Components.Player.InputComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Player.InputComponent));
         component.direction = newDirection;
+        component.walk = newWalk;
         component.dash = newDash;
         ReplaceComponent(index, component);
     }

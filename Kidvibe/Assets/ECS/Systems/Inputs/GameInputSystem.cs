@@ -21,6 +21,7 @@ namespace Kidvibe.ECS.Systems.Inputs
           Input.GetAxisRaw("Horizontal"),
           Input.GetAxisRaw("Vertical"))
           .normalized;
+        entity.input.walk = Input.GetKey(KeyCode.Space);
         entity.input.dash = Input.GetKeyDown(KeyCode.LeftShift);
       }
     }

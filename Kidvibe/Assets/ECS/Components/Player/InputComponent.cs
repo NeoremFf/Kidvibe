@@ -6,6 +6,7 @@ namespace Kidvibe.ECS.Components.Player
   public class InputComponent : IComponent
   {
     public Vector2 direction;
+    public bool walk;
     public bool dash;
   }
 }

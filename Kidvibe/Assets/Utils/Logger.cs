@@ -6,8 +6,11 @@ namespace Kidvibe.Assets.Utils
   public interface ILogger
   {
     void Log(string message);
-    void LogError(Exception exception);
-    void LogErrorWithMessage(Exception exception, string message);
+    void Warning(string message);
+    void Error(Exception exception);
+    void ErrorWithMessage(Exception exception, string message);
+
+    void TemporaryDebug(string message);
   }
 
   public class Logger : ILogger
@@ -20,7 +23,15 @@ namespace Kidvibe.Assets.Utils
 #endif
     }
 
-    public void LogError(Exception exception)
+    public void Warning(string message)
+    {
+#if UNITY_EDITOR
+      Debug.LogWarning(message);
+#else
+#endif
+    }
+
+    public void Error(Exception exception)
     {
 #if UNITY_EDITOR
       Debug.Log($"Message: {exception.Message}\n" +
@@ -29,10 +40,18 @@ namespace Kidvibe.Assets.Utils
 #endif
     }
 
-    public void LogErrorWithMessage(Exception exception, string message)
+    public void ErrorWithMessage(Exception exception, string message)
     {
       Log(message);
-      LogError(exception);
+      Error(exception);
+    }
+
+    public void TemporaryDebug(string message)
+    {
+#if UNITY_EDITOR
+      Debug.LogWarning($"------------------------ {message}");
+#else
+#endif
     }
   }
 }

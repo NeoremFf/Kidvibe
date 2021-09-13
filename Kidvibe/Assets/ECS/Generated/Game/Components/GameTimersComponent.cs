@@ -8,21 +8,21 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Kidvibe.ECS.Components.Game.Timer.TimersComponent timers { get { return (Kidvibe.ECS.Components.Game.Timer.TimersComponent)GetComponent(GameComponentsLookup.Timers); } }
+    public Kidvibe.ECS.Components.TimersComponent timers { get { return (Kidvibe.ECS.Components.TimersComponent)GetComponent(GameComponentsLookup.Timers); } }
     public bool hasTimers { get { return HasComponent(GameComponentsLookup.Timers); } }
 
-    public void AddTimers(System.Collections.Generic.List<Kidvibe.ECS.Components.Game.Timer.TimerBody> newBodies, Kidvibe.ECS.Components.Game.Timer.Pools.ITimerPool newPool, GameEntity newEntity) {
+    public void AddTimers(System.Collections.Generic.List<Kidvibe.GameLogic.Timer.TimerBody> newBodies, Kidvibe.Game.Timer.Pools.ITimerPool newPool, GameEntity newEntity) {
         var index = GameComponentsLookup.Timers;
-        var component = (Kidvibe.ECS.Components.Game.Timer.TimersComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Game.Timer.TimersComponent));
+        var component = (Kidvibe.ECS.Components.TimersComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.TimersComponent));
         component.bodies = newBodies;
         component.pool = newPool;
         component.entity = newEntity;
         AddComponent(index, component);
     }
 
-    public void ReplaceTimers(System.Collections.Generic.List<Kidvibe.ECS.Components.Game.Timer.TimerBody> newBodies, Kidvibe.ECS.Components.Game.Timer.Pools.ITimerPool newPool, GameEntity newEntity) {
+    public void ReplaceTimers(System.Collections.Generic.List<Kidvibe.GameLogic.Timer.TimerBody> newBodies, Kidvibe.Game.Timer.Pools.ITimerPool newPool, GameEntity newEntity) {
         var index = GameComponentsLookup.Timers;
-        var component = (Kidvibe.ECS.Components.Game.Timer.TimersComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Game.Timer.TimersComponent));
+        var component = (Kidvibe.ECS.Components.TimersComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.TimersComponent));
         component.bodies = newBodies;
         component.pool = newPool;
         component.entity = newEntity;
