@@ -1,6 +1,7 @@
 ﻿using Kidvibe.Assets.Utils.Exceptions;
-using Kidvibe.ECS.Components.Player.State;
+using Kidvibe.ECS.Components.Player;
 using Kidvibe.GameData.Static.Configs.Player;
+using Kidvibe.GameLogic.Player.State;
 using Zenject;
 
 namespace Kidvibe.GameLogic.Timer.Bodies

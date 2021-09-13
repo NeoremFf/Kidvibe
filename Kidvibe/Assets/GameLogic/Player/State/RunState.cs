@@ -1,8 +1,8 @@
-﻿using Kidvibe.ECS.Components.Player.State.Core;
-using Kidvibe.GameData.Static.Configs.Player;
+﻿using Kidvibe.GameData.Static.Configs.Player;
+using Kidvibe.GameLogic.Player.State.Core;
 using Zenject;
 
-namespace Kidvibe.ECS.Components.Player.State
+namespace Kidvibe.GameLogic.Player.State
 {
   public class RunState : PlayerState
   {

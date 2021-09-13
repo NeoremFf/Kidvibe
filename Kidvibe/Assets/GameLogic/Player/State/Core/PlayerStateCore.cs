@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Zenject;
 
-namespace Kidvibe.ECS.Components.Player.State.Core
+namespace Kidvibe.GameLogic.Player.State.Core
 {
   public class PlayerStateCore
   {

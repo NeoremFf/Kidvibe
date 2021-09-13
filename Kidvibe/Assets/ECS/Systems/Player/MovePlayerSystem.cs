@@ -1,5 +1,5 @@
 ﻿using Entitas;
-using Kidvibe.ECS.Components.Player.State;
+using Kidvibe.GameLogic.Player.State;
 using UnityEngine;
 
 namespace Kidvibe.ECS.Systems.Player

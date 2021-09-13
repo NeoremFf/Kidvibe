@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Kidvibe.ECS.Components.Player.State.Core;
 using Kidvibe.Game.Timer.Pools;
 using Kidvibe.GameData.Static.Configs.Player;
+using Kidvibe.GameLogic.Player.State.Core;
 using Kidvibe.GameLogic.Timer;
 using UnityEngine;
 using Zenject;

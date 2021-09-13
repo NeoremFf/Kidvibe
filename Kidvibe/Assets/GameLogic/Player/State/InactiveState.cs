@@ -1,6 +1,6 @@
-﻿using Kidvibe.ECS.Components.Player.State.Core;
+﻿using Kidvibe.GameLogic.Player.State.Core;
 
-namespace Kidvibe.ECS.Components.Player.State
+namespace Kidvibe.GameLogic.Player.State
 {
   public class InactiveState : PlayerState
   {

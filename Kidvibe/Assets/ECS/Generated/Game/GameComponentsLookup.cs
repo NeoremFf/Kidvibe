@@ -6,6 +6,10 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Kidvibe.ECS.Components.Player;
+using Kidvibe.GameLogic.Player.State;
+
 public static class GameComponentsLookup {
 
     public const int Dashable = 0;
@@ -42,7 +46,7 @@ public static class GameComponentsLookup {
         typeof(Kidvibe.ECS.Components.Player.MovableComponent),
         typeof(Kidvibe.ECS.Components.Player.Physic.RigidbodyComponent),
         typeof(Kidvibe.ECS.Components.Player.RunComponent),
-        typeof(Kidvibe.ECS.Components.Player.State.StateComponent),
+        typeof(StateComponent),
         typeof(Kidvibe.ECS.Components.Player.WalkComponent),
         typeof(Kidvibe.ECS.Components.TimersComponent)
     };

@@ -1,7 +1,7 @@
 ﻿using Kidvibe.Assets.Utils;
 using Zenject;
 
-namespace Kidvibe.ECS.Components.Player.State.Core
+namespace Kidvibe.GameLogic.Player.State.Core
 {
   public abstract class PlayerState
   {

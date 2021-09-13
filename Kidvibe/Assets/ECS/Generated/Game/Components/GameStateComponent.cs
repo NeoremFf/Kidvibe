@@ -6,21 +6,26 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Kidvibe.ECS.Components.Player;
+using Kidvibe.GameLogic.Player.State;
+using Kidvibe.GameLogic.Player.State.Core;
+
 public partial class GameEntity {
 
-    public Kidvibe.ECS.Components.Player.State.StateComponent state { get { return (Kidvibe.ECS.Components.Player.State.StateComponent)GetComponent(GameComponentsLookup.State); } }
+    public StateComponent state { get { return (StateComponent)GetComponent(GameComponentsLookup.State); } }
     public bool hasState { get { return HasComponent(GameComponentsLookup.State); } }
 
-    public void AddState(Kidvibe.ECS.Components.Player.State.Core.PlayerStateCore newCurrentState) {
+    public void AddState(PlayerStateCore newCurrentState) {
         var index = GameComponentsLookup.State;
-        var component = (Kidvibe.ECS.Components.Player.State.StateComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Player.State.StateComponent));
+        var component = (StateComponent)CreateComponent(index, typeof(StateComponent));
         component.currentState = newCurrentState;
         AddComponent(index, component);
     }
 
-    public void ReplaceState(Kidvibe.ECS.Components.Player.State.Core.PlayerStateCore newCurrentState) {
+    public void ReplaceState(PlayerStateCore newCurrentState) {
         var index = GameComponentsLookup.State;
-        var component = (Kidvibe.ECS.Components.Player.State.StateComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Player.State.StateComponent));
+        var component = (StateComponent)CreateComponent(index, typeof(StateComponent));
         component.currentState = newCurrentState;
         ReplaceComponent(index, component);
     }

@@ -1,10 +1,10 @@
-﻿using Kidvibe.ECS.Components.Player.State.Core;
-using Kidvibe.GameData.Static.Configs.Player;
+﻿using Kidvibe.GameData.Static.Configs.Player;
+using Kidvibe.GameLogic.Player.State.Core;
 using Kidvibe.GameLogic.Timer.Bodies;
 using UnityEngine;
 using Zenject;
 
-namespace Kidvibe.ECS.Components.Player.State
+namespace Kidvibe.GameLogic.Player.State
 {
   public class DashState : PlayerState
   {

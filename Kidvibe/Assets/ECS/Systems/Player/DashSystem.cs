@@ -1,6 +1,6 @@
 ﻿using Entitas;
 using Kidvibe.Assets.Utils;
-using Kidvibe.ECS.Components.Player.State;
+using Kidvibe.GameLogic.Player.State;
 using Kidvibe.GameLogic.Timer.Bodies;
 using Zenject;
 
