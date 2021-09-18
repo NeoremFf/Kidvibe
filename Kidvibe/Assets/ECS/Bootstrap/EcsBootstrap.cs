@@ -10,11 +10,10 @@ namespace Kidvibe.ECS.Bootstrap
   {
     private MainGameFeatures _systems;
 
-    [Inject] private GameContext _gameContext;
     [Inject] private DiContainer _diContainer;
 
     private void Awake() =>
-      _systems = new MainGameFeatures(_gameContext, _diContainer);
+      _systems = new MainGameFeatures(_diContainer);
 
     private void Start() =>
       _systems.Initialize();
@@ -31,7 +30,7 @@ namespace Kidvibe.ECS.Bootstrap
 
   public class MainGameFeatures : Feature
   {
-    public MainGameFeatures(GameContext context, DiContainer diContainer)
+    public MainGameFeatures(DiContainer diContainer)
     {
       Add(diContainer.Instantiate<GameInputSystem>());
       Add(diContainer.Instantiate<MoveablePlayerSystem>());

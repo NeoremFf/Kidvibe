@@ -2,6 +2,7 @@
 using Kidvibe.Assets.Utils;
 using Kidvibe.GameLogic.Player.State;
 using Kidvibe.GameLogic.Timer.Bodies;
+using Kidvibe.Utils;
 using Zenject;
 
 namespace Kidvibe.ECS.Systems.Player
@@ -35,7 +36,8 @@ namespace Kidvibe.ECS.Systems.Player
     public DashableSystem(GameContext context)
     {
       _dashable = context.GetGroup(
-        GameMatcher.AllOf(GameMatcher.Input,
+        GameMatcher.AllOf(
+          GameMatcher.Input,
           GameMatcher.Dashable,
           GameMatcher.DashCharges,
           GameMatcher.State,
@@ -48,11 +50,7 @@ namespace Kidvibe.ECS.Systems.Player
       {
         if (entity.input.dash && entity.dashCharges.count > 0)
         {
-          entity.state.currentState.Set<DashState>(entity.input.direction);
-
-          _logger.TemporaryDebug("<color=red>Remove</color>");
-          _logger.TemporaryDebug($"Current count of charges: {entity.dashCharges.count}");
-        }
+          entity.state.currentState.Set<DashState>(entity.input.direction); }
       }
     }
   }

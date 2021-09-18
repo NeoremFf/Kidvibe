@@ -6,7 +6,6 @@ namespace Kidvibe.App
   {
     public override void InstallBindings()
     {
-      // Container.Bind<ILogger>().To<Logger>().AsSingle();
     }
   }
 }

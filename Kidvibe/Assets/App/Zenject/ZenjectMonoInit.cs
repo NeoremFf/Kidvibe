@@ -1,7 +1,7 @@
-using Kidvibe.Assets.Utils;
 using Kidvibe.Game.Timer.Pools;
 using Kidvibe.GameData.Static.Configs.Player;
 using Kidvibe.GameLogic.Player.State.Core;
+using Kidvibe.Utils;
 using Zenject;
 
 namespace Kidvibe.App.Zenject

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Kidvibe.Assets.Utils.Exceptions
+namespace Kidvibe.Utils.Exceptions
 {
   public class EcsComponentMissingException : Exception
   {
