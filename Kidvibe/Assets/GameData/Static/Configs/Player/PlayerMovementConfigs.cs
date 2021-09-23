@@ -16,7 +16,7 @@ namespace Kidvibe.GameData.Static.Configs.Player
     public float Duration { get; set; } = 0.36f;
 
     public int ChargeCount { get; set; } = 4;
-    public float ChargeRefreshDelayTime { get; set; } = 5;// = 0.25f;
-    public float ChargeRefreshTime { get; set; } = 2;//= 0.38f;
+    public float ChargeRefreshDelayTime { get; set; }  = 0.25f;
+    public float ChargeRefreshTime { get; set; } = 0.38f;
   }
 }
