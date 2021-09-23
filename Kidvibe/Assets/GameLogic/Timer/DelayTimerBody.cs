@@ -1,4 +1,6 @@
-﻿namespace Kidvibe.GameLogic.Timer
+﻿using Kidvibe.Utils;
+
+namespace Kidvibe.GameLogic.Timer
 {
   public abstract class DelayTimerBody : TimerBody
   {
@@ -8,19 +10,19 @@
 
     protected void RunDelay(float delayTime)
     {
-      logger.Log("<color=blue>[TIMER]</color> is running with delay");
+      logger.LogWithTag(LogTag.Timer, LogColor.Orange, "is running with delay");
 
       isDelay = true;
       Run(delayTime);
     }
 
-    protected override void OnExpired()
+    protected override void Expired()
     {
-      logger.Log("<color=blue>[TIMER]</color> delay has been expired. Start timer ticking");
+      logger.LogWithTag(LogTag.Timer, LogColor.Orange, "delay has been expired. Start timer ticking");
 
       if (!isDelay)
       {
-        base.OnExpired();
+        base.Expired();
         
         return;
       }

@@ -1,7 +1,8 @@
-﻿using Kidvibe.Assets.Utils.Exceptions;
-using Kidvibe.ECS.Components.Player;
+﻿using Kidvibe.ECS.Components.Player;
 using Kidvibe.GameData.Static.Configs.Player;
 using Kidvibe.GameLogic.Player.State;
+using Kidvibe.Utils;
+using Kidvibe.Utils.Exceptions;
 using Zenject;
 
 namespace Kidvibe.GameLogic.Timer.Bodies
@@ -12,14 +13,14 @@ namespace Kidvibe.GameLogic.Timer.Bodies
 
     public override void Run()
     {
-      base.Run(_configs.Duration);
+      Run(_configs.Duration);
     }
 
-    protected override void OnExpired()
+    protected override void Expired()
     {
-      base.OnExpired();
+      base.Expired();
 
-      logger.Log($"<color=blue>[TIMER]</color> {nameof(TimerBodyDashDuration)} has been expired!");
+      logger.LogWithTag(LogTag.Timer, LogColor.Orange, $"{nameof(TimerBodyDashDuration)} has been expired!");
 
       if (!entity.hasState)
       {

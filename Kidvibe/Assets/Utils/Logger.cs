@@ -10,11 +10,17 @@ namespace Kidvibe.Utils
     Orange,
     Blue,
   }
+
+  public enum LogTag
+  {
+    State,
+    Timer,
+  }
   
   public interface ILogger
   {
     void Log(string message);
-    void LogWithTag(string tag, LogColor color, string message);
+    void LogWithTag(LogTag tag, LogColor color, string message);
     void Warning(string message);
     void Error(Exception exception);
     void ErrorWithMessage(Exception exception, string message);
@@ -32,10 +38,10 @@ namespace Kidvibe.Utils
 #endif
     }
 
-    public void LogWithTag(string tag, LogColor color, string message)
+    public void LogWithTag(LogTag tag, LogColor color, string message)
     {
 #if UNITY_EDITOR
-      Debug.Log($"{ColoredText(color, tag)} {message}");
+      Debug.Log($">>> {ColoredText(color, tag)} {message}");
 #else
 #endif
     }
@@ -71,7 +77,7 @@ namespace Kidvibe.Utils
 #endif
     }
 
-    private string ColoredText(LogColor color, string text) =>
+    private string ColoredText(LogColor color, LogTag text) =>
       $"<color={color.ToString().ToLower()}>{text}</color>";
   }
 }

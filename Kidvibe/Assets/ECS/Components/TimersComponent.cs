@@ -27,9 +27,9 @@ namespace Kidvibe.ECS.Components
       where TTimerType : TimerBody, new() =>
       Get<TTimerType>().Run();
 
-    public void SetWhitDelay<TTimerType>()
+    public void Delay<TTimerType>()
       where TTimerType : TimerBody, new() =>
-      ((DelayTimerBody) Get<TTimerType>()).RunDelay();
+      Get<TTimerType>().Delay();
 
     public void Continue<TTimerType>()       
       where TTimerType : TimerBody, new() =>

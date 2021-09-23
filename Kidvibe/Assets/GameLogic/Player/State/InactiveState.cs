@@ -1,4 +1,5 @@
 ﻿using Kidvibe.GameLogic.Player.State.Core;
+using Kidvibe.Utils;
 
 namespace Kidvibe.GameLogic.Player.State
 {
@@ -6,12 +7,12 @@ namespace Kidvibe.GameLogic.Player.State
   {
     public override void OnAdd()
     {
-      logger.Log("Create " + nameof(InactiveState));
+      logger.LogWithTag(LogTag.State, LogColor.Green, $"Added {nameof(InactiveState)}");
     }
 
     public override void OnRemove()
     {
-      logger.Log("Remove " + nameof(InactiveState));
+      logger.LogWithTag(LogTag.State, LogColor.Green, $"Removed {nameof(InactiveState)}");
     }
   }
 }

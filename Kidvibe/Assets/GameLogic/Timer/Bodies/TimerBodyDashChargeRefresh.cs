@@ -1,26 +1,27 @@
-﻿using Kidvibe.Assets.Utils.Exceptions;
-using Kidvibe.ECS.Components;
+﻿using Kidvibe.ECS.Components;
 using Kidvibe.ECS.Components.Player;
 using Kidvibe.GameData.Static.Configs.Player;
-using Kidvibe.GameLogic.Player.State;
+using Kidvibe.Utils;
+using Kidvibe.Utils.Exceptions;
 using Zenject;
 
 namespace Kidvibe.GameLogic.Timer.Bodies
 {
-  public class TimerBodyDashChargeRefresh : DelayTimerBody, IRepeatableTimerWithDelay
+  public class TimerBodyDashChargeRefresh : TimerBody, IRepeatableTimerWithDelay
   {
     [Inject] private readonly PlayerDashConfigs _configs;
 
-    public void Repeat()
+    public void Repeat(float delay)
     {
-      logger.Log($"<color=blue>[TIMER]</color> {typeof(TimerBodyDashChargeRefresh)} is repeating!");
+      logger.LogWithTag(LogTag.Timer, LogColor.Orange, 
+        $"{typeof(TimerBodyDashChargeRefresh)} is repeating in {delay} seconds!");
       
-      RunDelay();
+      Delay(delay);
     }
     
-    public override void RunDelay()
+    public override void Delay()
     {
-      base.RunDelay(_configs.ChargeRefreshDelayTime);
+      Delay(_configs.ChargeRefreshDelayTime);
     }
 
     public override void Run()
@@ -28,18 +29,12 @@ namespace Kidvibe.GameLogic.Timer.Bodies
       Run(_configs.ChargeRefreshTime);
     }
 
-    protected override void OnExpired()
+    protected override void Expired()
     {
-      base.OnExpired();
+      base.Expired();
 
-      if (isDelay)
-      {
-        isDelay = false;
-        
-        return;
-      }
-      
-      logger.Log($"<color=blue>[TIMER]</color> {typeof(TimerBodyDashChargeRefresh)} has been expired!");
+      logger.LogWithTag(LogTag.Timer, LogColor.Orange, 
+        $"{typeof(TimerBodyDashChargeRefresh)} has been expired!");
 
       if (!entity.hasDashCharges)
       {
@@ -57,15 +52,11 @@ namespace Kidvibe.GameLogic.Timer.Bodies
         return;
       }
 
-      if (entity.dashCharges.count != entity.dashCharges.maxCount)
-      {
-        entity.dashCharges.Add();
-       
-        logger.TemporaryDebug("<color=green>Remove</color>");
-        logger.TemporaryDebug($"Current count of charges: {entity.dashCharges.count}");
-        
-        Repeat();
-      }
+      entity.dashCharges.Add();
+      logger.TemporaryDebug("ADD CHARGE"); // todo remove
+      
+      if (entity.dashCharges.count != entity.dashCharges.maxCount) 
+        Repeat(_configs.ChargeRefreshDelayTime);
     }
   }
 }

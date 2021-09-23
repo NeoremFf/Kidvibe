@@ -22,7 +22,7 @@ namespace Kidvibe.ECS.Systems.Game.Timer
     {
       var deltaTime = Time.deltaTime;
       
-      foreach (var entity in _timers.GetEntities())
+      foreach (var entity in _timers)
       foreach (var timer in entity.timers.bodies)
         timer.Tick(deltaTime);
     }

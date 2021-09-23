@@ -1,5 +1,6 @@
-﻿using Kidvibe.Assets.Utils;
+﻿using Kidvibe.Utils;
 using Zenject;
+using ILogger = Kidvibe.Utils.ILogger;
 
 namespace Kidvibe.GameLogic.Timer
 {
@@ -9,48 +10,95 @@ namespace Kidvibe.GameLogic.Timer
 
     private bool _isPause;
     private bool _isRun;
+    
+    private bool _isDelay;
 
     private float _time;
+    private float _delay;
 
     protected GameEntity entity;
 
     public TimerBody Init(GameEntity entity)
     {
       this.entity = entity;
+      
       return this;
     }
 
     public abstract void Run();
 
-    protected void Run(float startTime)
-    {
-      logger.Log($"<color=blue>[TIMER]</color> is running in {startTime} seconds");
-
-      _time = startTime;
-      _isRun = true;
-      _isPause = false;
-    }
-
-    public void Continue() => _isPause = false;
-    public void Pause() => _isPause = true;
+    public virtual void Delay() { }
 
     public void Tick(float timeLeft)
     {
-      if (!_isRun || _isPause) return;
-
-      _time -= timeLeft;
-
-      if (_time <= 0)
-      {
-        OnExpired();
-      }
+      if (_isDelay)
+        DelayTick(timeLeft);
+      else if (_isRun)
+        TimeTick(timeLeft);
+    }
+    
+    public void Continue() => _isPause = false;
+    public void Pause() => _isPause = true;
+    
+    protected void Run(float startTime)
+    {
+      logger.LogWithTag(LogTag.Timer, LogColor.Orange, $"is running in {startTime} seconds");
+      
+      _time = startTime;
+      _delay = 0;
+      
+      _isRun = true;
+      _isPause = false;
+      _isDelay = false;
+    }
+    
+    protected void Delay(float delayTime)
+    {
+      logger.LogWithTag(LogTag.Timer, LogColor.Orange, $"is delay in {delayTime} seconds");
+      
+      _delay = delayTime;
+      _isDelay = true;
     }
 
-    protected virtual void OnExpired()
+    protected virtual void Expired()
     {
-      logger.Log("<color=blue>[TIMER]</color> has been expired");
-
       _isRun = false;
+    }
+
+    private void TimeTick(float timeLeft)
+    {
+      _time -= timeLeft;
+
+      if (_time <= 0) 
+        Expired();
+    }
+    
+    private void DelayTick(float timeLeft)
+    {
+      _delay -= timeLeft;
+
+      if (_delay <= 0)
+        DelayEnded();
+    }
+    
+    private void DelayEnded()
+    {
+      logger.LogWithTag(LogTag.Timer, LogColor.Orange, "delay has been expired");
+      
+      _isDelay = false;
+
+      if (_isRun)
+      {
+        Continue();
+
+        logger.LogWithTag(LogTag.Timer, LogColor.Orange, "continue run.");
+      }
+      else
+      {
+        Run();
+
+        logger.LogWithTag(LogTag.Timer, LogColor.Orange, "start run after delay.");
+      }
     }
   }
 }

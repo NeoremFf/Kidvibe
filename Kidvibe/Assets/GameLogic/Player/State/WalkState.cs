@@ -1,5 +1,6 @@
 ﻿using Kidvibe.GameData.Static.Configs.Player;
 using Kidvibe.GameLogic.Player.State.Core;
+using Kidvibe.Utils;
 using Zenject;
 
 namespace Kidvibe.GameLogic.Player.State
@@ -13,7 +14,8 @@ namespace Kidvibe.GameLogic.Player.State
       entity.AddWalk(_movementConfigs.WalkSpeed);
       entity.isDashable = true;
 
-      logger.Log("Add walk state");
+      logger.LogWithTag(LogTag.State, LogColor.Green, $"Added {nameof(WalkState)}");
+
     }
 
     public override void OnRemove()
@@ -21,7 +23,7 @@ namespace Kidvibe.GameLogic.Player.State
       entity.RemoveWalk();
       entity.isDashable = false;
 
-      logger.Log("Remove walk state");
+      logger.LogWithTag(LogTag.State, LogColor.Green, $"Removed {nameof(WalkState)}");
     }
   }
 }

@@ -1,5 +1,6 @@
 ﻿using Kidvibe.GameData.Static.Configs.Player;
 using Kidvibe.GameLogic.Player.State.Core;
+using Kidvibe.Utils;
 using Zenject;
 
 namespace Kidvibe.GameLogic.Player.State
@@ -13,7 +14,7 @@ namespace Kidvibe.GameLogic.Player.State
       entity.AddRun(_movementConfigs.RunSpeed);
       entity.isDashable = true;
       
-      logger.Log("Add run state");
+      logger.LogWithTag(LogTag.State, LogColor.Green, $"Added {nameof(RunState)}");
     }
 
     public override void OnRemove()
@@ -21,7 +22,7 @@ namespace Kidvibe.GameLogic.Player.State
       entity.RemoveRun();
       entity.isDashable = false;
 
-      logger.Log("Remove run state");
+      logger.LogWithTag(LogTag.State, LogColor.Green, $"Removed {nameof(RunState)}");
     }
   }
 }
