@@ -14,6 +14,7 @@ namespace Kidvibe.Utils
   public enum LogTag
   {
     State,
+    Effect,
     Timer,
   }
   

@@ -8,9 +8,7 @@ namespace Kidvibe.GameLogic.Timer
   {
     [Inject] protected readonly ILogger logger;
 
-    private bool _isPause;
     private bool _isRun;
-    
     private bool _isDelay;
 
     private float _time;
@@ -37,9 +35,6 @@ namespace Kidvibe.GameLogic.Timer
         TimeTick(timeLeft);
     }
     
-    public void Continue() => _isPause = false;
-    public void Pause() => _isPause = true;
-    
     protected void Run(float startTime)
     {
       logger.LogWithTag(LogTag.Timer, LogColor.Orange, $"is running in {startTime} seconds");
@@ -48,7 +43,6 @@ namespace Kidvibe.GameLogic.Timer
       _delay = 0;
       
       _isRun = true;
-      _isPause = false;
       _isDelay = false;
     }
     
@@ -64,7 +58,7 @@ namespace Kidvibe.GameLogic.Timer
     {
       _isRun = false;
     }
-
+    
     private void TimeTick(float timeLeft)
     {
       _time -= timeLeft;
@@ -89,8 +83,6 @@ namespace Kidvibe.GameLogic.Timer
 
       if (_isRun)
       {
-        Continue();
-
         logger.LogWithTag(LogTag.Timer, LogColor.Orange, "continue run.");
       }
       else

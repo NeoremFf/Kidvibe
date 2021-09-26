@@ -11,7 +11,7 @@ public partial class GameEntity {
     public Kidvibe.ECS.Components.TimersComponent timers { get { return (Kidvibe.ECS.Components.TimersComponent)GetComponent(GameComponentsLookup.Timers); } }
     public bool hasTimers { get { return HasComponent(GameComponentsLookup.Timers); } }
 
-    public void AddTimers(System.Collections.Generic.List<Kidvibe.GameLogic.Timer.TimerBody> newBodies, Kidvibe.Game.Timer.Pools.ITimerPool newPool, GameEntity newEntity) {
+    public void AddTimers(System.Collections.Generic.List<Kidvibe.GameLogic.Timer.TimerBody> newBodies, Kidvibe.GameLogic.Timer.Pools.ITimerPool newPool, GameEntity newEntity) {
         var index = GameComponentsLookup.Timers;
         var component = (Kidvibe.ECS.Components.TimersComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.TimersComponent));
         component.bodies = newBodies;
@@ -20,7 +20,7 @@ public partial class GameEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceTimers(System.Collections.Generic.List<Kidvibe.GameLogic.Timer.TimerBody> newBodies, Kidvibe.Game.Timer.Pools.ITimerPool newPool, GameEntity newEntity) {
+    public void ReplaceTimers(System.Collections.Generic.List<Kidvibe.GameLogic.Timer.TimerBody> newBodies, Kidvibe.GameLogic.Timer.Pools.ITimerPool newPool, GameEntity newEntity) {
         var index = GameComponentsLookup.Timers;
         var component = (Kidvibe.ECS.Components.TimersComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.TimersComponent));
         component.bodies = newBodies;

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Kidvibe.GameLogic.Timer;
 using Kidvibe.GameLogic.Timer.Bodies;
 using Zenject;
 
-namespace Kidvibe.Game.Timer.Pools
+namespace Kidvibe.GameLogic.Timer.Pools
 {
   public class PlayerTimerPool : ITimerPool
   {
     public IReadOnlyCollection<TimerBody> Bodies => Pool.Values;
 
-    public Dictionary<Type, TimerBody> Pool { get; }
+    private Dictionary<Type, TimerBody> Pool { get; }
 
     [Inject]
     public PlayerTimerPool(DiContainer di)

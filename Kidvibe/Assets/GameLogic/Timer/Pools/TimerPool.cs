@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Kidvibe.GameLogic.Timer;
+﻿using System.Collections.Generic;
 
-namespace Kidvibe.Game.Timer.Pools
+namespace Kidvibe.GameLogic.Timer.Pools
 {
   public interface ITimerPool
   {
     IReadOnlyCollection<TimerBody> Bodies { get; }
-
-    Dictionary<Type, TimerBody> Pool { get; }
-
+    
     TimerBody GetBy<TBodyType>() where TBodyType : TimerBody;
   }
 }

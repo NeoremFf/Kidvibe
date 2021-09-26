@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 using Kidvibe.Assets.Utils.Exceptions;
-using Kidvibe.Game.Timer;
-using Kidvibe.Game.Timer.Pools;
 using Kidvibe.GameLogic.Timer;
+using Kidvibe.GameLogic.Timer.Pools;
 
 namespace Kidvibe.ECS.Components
 {
@@ -30,14 +29,6 @@ namespace Kidvibe.ECS.Components
     public void Delay<TTimerType>()
       where TTimerType : TimerBody, new() =>
       Get<TTimerType>().Delay();
-
-    public void Continue<TTimerType>()       
-      where TTimerType : TimerBody, new() =>
-      Get<TTimerType>().Continue();
-
-    public void Pause<TTimerType>() 
-      where TTimerType : TimerBody, new() =>
-      Get<TTimerType>().Pause();
 
     private TimerBody Get<TTimerType>() 
       where TTimerType : TimerBody, new()
