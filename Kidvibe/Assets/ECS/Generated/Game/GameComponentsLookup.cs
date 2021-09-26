@@ -6,35 +6,33 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Kidvibe.ECS.Components.Player;
-using Kidvibe.GameLogic.Player.State;
-
 public static class GameComponentsLookup {
 
     public const int Dashable = 0;
     public const int DashCharges = 1;
     public const int Dash = 2;
-    public const int Input = 3;
-    public const int Movable = 4;
-    public const int Rigidbody = 5;
-    public const int Run = 6;
-    public const int State = 7;
-    public const int Walk = 8;
-    public const int Timers = 9;
+    public const int Effects = 3;
+    public const int Input = 4;
+    public const int Movable = 5;
+    public const int Rigidbody = 6;
+    public const int Run = 7;
+    public const int RunSpeed = 8;
+    public const int State = 9;
+    public const int Timers = 10;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "Dashable",
         "DashCharges",
         "Dash",
+        "Effects",
         "Input",
         "Movable",
         "Rigidbody",
         "Run",
+        "RunSpeed",
         "State",
-        "Walk",
         "Timers"
     };
 
@@ -42,12 +40,13 @@ public static class GameComponentsLookup {
         typeof(Kidvibe.ECS.Components.Player.DashableComponent),
         typeof(Kidvibe.ECS.Components.Player.DashChargesComponent),
         typeof(Kidvibe.ECS.Components.Player.DashComponent),
+        typeof(Kidvibe.ECS.Components.Player.EffectsComponent),
         typeof(Kidvibe.ECS.Components.Player.InputComponent),
         typeof(Kidvibe.ECS.Components.Player.MovableComponent),
         typeof(Kidvibe.ECS.Components.Player.Physic.RigidbodyComponent),
         typeof(Kidvibe.ECS.Components.Player.RunComponent),
-        typeof(StateComponent),
-        typeof(Kidvibe.ECS.Components.Player.WalkComponent),
+        typeof(Kidvibe.ECS.Components.Player.RunSpeedComponent),
+        typeof(Kidvibe.ECS.Components.Player.StateComponent),
         typeof(Kidvibe.ECS.Components.TimersComponent)
     };
 }

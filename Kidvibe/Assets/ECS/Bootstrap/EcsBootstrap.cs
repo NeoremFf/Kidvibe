@@ -38,6 +38,7 @@ namespace Kidvibe.ECS.Bootstrap
       Add(diContainer.Instantiate<DashableSystem>());
       Add(diContainer.Instantiate<DashSystem>());
       Add(diContainer.Instantiate<TimersSystem>());
+      Add(diContainer.Instantiate<EffectsSystem>());
     }
   }
 }
