@@ -1,4 +1,5 @@
 ﻿using Kidvibe.GameData.Static.Configs.Player;
+using Kidvibe.GameLogic.Player.Effects.Entities.Player;
 using Kidvibe.GameLogic.Player.State.Core;
 using Kidvibe.GameLogic.Timer.Bodies;
 using Kidvibe.Utils;
@@ -18,8 +19,10 @@ namespace Kidvibe.GameLogic.Player.State
       logger.LogWithTag(LogTag.State, LogColor.Green, $"Added {nameof(DashState)}");
       
       entity.dashCharges.Remove();
+      if (entity.dashCharges.count == 0)
+        entity.effects.Apply<WeaknessEffect>();
+
       entity.timers.Delay<TimerBodyDashChargeRefresh>();
-      logger.TemporaryDebug("REMOVE CHARGE"); // todo remove
        
       entity.AddDash(_dashConfigs.Power, _direction);
       entity.timers.Set<TimerBodyDashDuration>();

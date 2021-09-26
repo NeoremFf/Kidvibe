@@ -6,32 +6,26 @@ namespace Kidvibe.ECS.Systems.Player
 {
   public class MovePlayerSystem : IExecuteSystem
   {
-    private readonly IGroup<GameEntity> Inputs;
-    private readonly IGroup<GameEntity> MoveType;
+    private readonly IGroup<GameEntity> _inputs;
+    private readonly IGroup<GameEntity> _move;
     
     public MovePlayerSystem(GameContext context)
     {
-      Inputs = context.GetGroup(
+      _inputs = context.GetGroup(
         GameMatcher.AllOf(GameMatcher.Input,
           GameMatcher.Rigidbody,
           GameMatcher.State));
-      MoveType = context.GetGroup(
-        GameMatcher.AnyOf(GameMatcher.Walk,
-          GameMatcher.Run));
+      _move = context.GetGroup(GameMatcher.AllOf(GameMatcher.Run,
+        GameMatcher.RunSpeed));
     }
 
     public void Execute()
     {
-      foreach (var entity in Inputs)
-      foreach (var moveType in MoveType.GetEntities())
+      foreach (var entity in _inputs)
+      foreach (var move in _move.GetEntities())
       {
-        if (entity.input.walk)
-          entity.state.currentState.Set<WalkState>();
-        else
-          entity.state.currentState.Set<RunState>();
-
-        var speed = moveType.hasWalk ? moveType.walk.speed : moveType.run.speed;
         var direction = entity.input.direction;
+        var speed = entity.input.walk ? move.runSpeed.walk : move.runSpeed.run;
 
         entity.rigidbody.rigidbody.velocity = entity.input.direction * speed;
         
@@ -60,10 +54,7 @@ namespace Kidvibe.ECS.Systems.Player
       {
         if (entity.input.direction != Vector2.zero)
         {
-          if (entity.input.walk)
-            entity.state.currentState.Set<WalkState>();
-          else
-            entity.state.currentState.Set<RunState>();
+          entity.state.currentState.Set<RunState>();
         }
 
         entity.rigidbody.rigidbody.velocity = Vector2.zero; // for reset velocity after dash

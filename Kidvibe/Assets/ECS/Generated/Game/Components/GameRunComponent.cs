@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Kidvibe.ECS.Components.Player.RunComponent run { get { return (Kidvibe.ECS.Components.Player.RunComponent)GetComponent(GameComponentsLookup.Run); } }
-    public bool hasRun { get { return HasComponent(GameComponentsLookup.Run); } }
+    static readonly Kidvibe.ECS.Components.Player.RunComponent runComponent = new Kidvibe.ECS.Components.Player.RunComponent();
 
-    public void AddRun(float newSpeed) {
-        var index = GameComponentsLookup.Run;
-        var component = (Kidvibe.ECS.Components.Player.RunComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Player.RunComponent));
-        component.speed = newSpeed;
-        AddComponent(index, component);
-    }
+    public bool isRun {
+        get { return HasComponent(GameComponentsLookup.Run); }
+        set {
+            if (value != isRun) {
+                var index = GameComponentsLookup.Run;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : runComponent;
 
-    public void ReplaceRun(float newSpeed) {
-        var index = GameComponentsLookup.Run;
-        var component = (Kidvibe.ECS.Components.Player.RunComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Player.RunComponent));
-        component.speed = newSpeed;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemoveRun() {
-        RemoveComponent(GameComponentsLookup.Run);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 

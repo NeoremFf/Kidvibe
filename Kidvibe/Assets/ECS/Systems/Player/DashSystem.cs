@@ -50,7 +50,8 @@ namespace Kidvibe.ECS.Systems.Player
       {
         if (entity.input.dash && entity.dashCharges.count > 0)
         {
-          entity.state.currentState.Set<DashState>(entity.input.direction); }
+          entity.state.currentState.Set<DashState>(entity.input.direction);
+        }
       }
     }
   }

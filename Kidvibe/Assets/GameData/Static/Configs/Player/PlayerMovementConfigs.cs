@@ -5,8 +5,9 @@ namespace Kidvibe.GameData.Static.Configs.Player
   [Serializable]
   public class PlayerMovementConfigs
   {
-    public float WalkSpeed { get; set; } = 1;
     public float RunSpeed { get; set; } = 5;
+    public float WalkSpeed { get; set; } = 1;
+    public float WeaknessRunSpeed { get; set; } = 1;
   }
 
   [Serializable]

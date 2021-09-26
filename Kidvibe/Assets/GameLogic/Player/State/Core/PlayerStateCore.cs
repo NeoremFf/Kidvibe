@@ -17,7 +17,6 @@ namespace Kidvibe.GameLogic.Player.State.Core
       _statesPool = new Dictionary<Type, PlayerState>()
       {
         [typeof(IdleState)] = diContainer.Instantiate<IdleState>(),
-        [typeof(WalkState)] = diContainer.Instantiate<WalkState>(),
         [typeof(RunState)] = diContainer.Instantiate<RunState>(),
         [typeof(DashState)] = diContainer.Instantiate<DashState>(),
         [typeof(InactiveState)] = diContainer.Instantiate<InactiveState>()
