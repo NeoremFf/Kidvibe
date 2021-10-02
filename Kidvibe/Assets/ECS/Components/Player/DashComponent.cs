@@ -1,5 +1,7 @@
 ﻿using Entitas;
+using Kidvibe.GameData.Dynamic.Game.Player;
 using UnityEngine;
+using Zenject;
 
 namespace Kidvibe.ECS.Components.Player
 {
@@ -14,18 +16,5 @@ namespace Kidvibe.ECS.Components.Player
   public class DashChargesComponent : IComponent
   {
     public int count;
-    public int maxCount;
-
-    public void Reset() =>
-      count = maxCount;
-
-    public void Add(int add = 1) =>
-      count += add;
-    
-    public void Remove(int remove = 1) =>
-      count -= remove;
-    
-    public void Set(int newCount) =>
-      count = newCount;
   }
 }

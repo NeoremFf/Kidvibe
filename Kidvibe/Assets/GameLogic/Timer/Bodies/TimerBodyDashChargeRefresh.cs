@@ -1,5 +1,6 @@
 ﻿using Kidvibe.ECS.Components;
 using Kidvibe.ECS.Components.Player;
+using Kidvibe.GameData.Dynamic.Game.Player;
 using Kidvibe.GameData.Static.Configs.Player;
 using Kidvibe.GameLogic.Player.Effects.Entities.Player;
 using Kidvibe.Utils;
@@ -11,6 +12,7 @@ namespace Kidvibe.GameLogic.Timer.Bodies
   public class TimerBodyDashChargeRefresh : TimerBody, IRepeatableTimerWithDelay
   {
     [Inject] private readonly PlayerDashConfigs _configs;
+    [Inject] private PlayerWrapper _wrapper;
 
     public void Repeat(float delay)
     {
@@ -40,9 +42,9 @@ namespace Kidvibe.GameLogic.Timer.Bodies
       if (!Validate())
         return;
 
-      entity.dashCharges.Add();
+      _wrapper.dashData.Add();
       
-      if (entity.dashCharges.count != entity.dashCharges.maxCount) 
+      if (_wrapper.dashData.Count != _wrapper.dashData.MaxCount) 
         Repeat(_configs.ChargeRefreshDelayTime);
       else if (entity.effects.Has<WeaknessEffect>())
         entity.effects.Disable<WeaknessEffect>();

@@ -11,19 +11,17 @@ public partial class GameEntity {
     public Kidvibe.ECS.Components.Player.DashChargesComponent dashCharges { get { return (Kidvibe.ECS.Components.Player.DashChargesComponent)GetComponent(GameComponentsLookup.DashCharges); } }
     public bool hasDashCharges { get { return HasComponent(GameComponentsLookup.DashCharges); } }
 
-    public void AddDashCharges(int newCount, int newMaxCount) {
+    public void AddDashCharges(int newCount) {
         var index = GameComponentsLookup.DashCharges;
         var component = (Kidvibe.ECS.Components.Player.DashChargesComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Player.DashChargesComponent));
         component.count = newCount;
-        component.maxCount = newMaxCount;
         AddComponent(index, component);
     }
 
-    public void ReplaceDashCharges(int newCount, int newMaxCount) {
+    public void ReplaceDashCharges(int newCount) {
         var index = GameComponentsLookup.DashCharges;
         var component = (Kidvibe.ECS.Components.Player.DashChargesComponent)CreateComponent(index, typeof(Kidvibe.ECS.Components.Player.DashChargesComponent));
         component.count = newCount;
-        component.maxCount = newMaxCount;
         ReplaceComponent(index, component);
     }
 
