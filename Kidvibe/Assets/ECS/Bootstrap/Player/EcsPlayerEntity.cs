@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Kidvibe.ECS.Containers;
 using Kidvibe.GameData.Dynamic.Game.Player;
 using Kidvibe.GameData.Static.Configs.Player;
 using Kidvibe.GameLogic.Player.Effects.Core;
@@ -13,6 +14,7 @@ namespace Kidvibe.ECS.Bootstrap.Player
   public class EcsPlayerEntity : MonoBehaviour
   {
     [Inject] private readonly PlayerWrapper _wrapper;
+    [Inject] private readonly GameObjectsContainer _container;
     
     [Inject] private readonly PlayerStateCore _playerState;
     [Inject] private readonly PlayerMovementConfigs _moveConfigs;
@@ -33,6 +35,8 @@ namespace Kidvibe.ECS.Bootstrap.Player
       player.AddDashCharges(_wrapper.dashData.MaxCount);
 
       _playerState.Init(player);
+      
+      _container.Add(player, gameObject, "Player");
     }
   }
 }
