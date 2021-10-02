@@ -1,62 +1,64 @@
 ﻿using UnityEngine;
-using UI;
 
-public class UIElement : MonoBehaviour
+namespace Kidvibe.UI
 {
-  public UIKey Key { get; private set; }
-
-  public GameObject Element =>
-    _element;
-
-  public bool HideOther => _config.Show == ShowParametr.HideAll || ForcedHideOther;
-  public bool ForcedHideOther => _config.Show == ShowParametr.ForcedHideAll;
-
-  public bool NeedRemoveFromCache => _config.CacheType == CacheParametr.Destroy;
-
-  public bool NeverHide => _config.Hide == HideParametr.NeverHide;
-
-  private GameObject _element;
-
-  private UIConfiguration _config;
-
-  private void Awake()
+  public class UIElement : MonoBehaviour
   {
-    Create();
-  }
+    public UIKey Key { get; private set; }
 
-  protected virtual void Create()
-  {
-    _element = gameObject;
+    public GameObject Element =>
+      _element;
 
-    _element.SetActive(false);
-  }
+    public bool HideOther => _config.Show == ShowParametr.HideAll || ForcedHideOther;
+    public bool ForcedHideOther => _config.Show == ShowParametr.ForcedHideAll;
 
-  public virtual void Init(UIKey key, UIConfiguration configs)
-  {
-    Key = key;
+    public bool NeedRemoveFromCache => _config.CacheType == CacheParametr.Destroy;
 
-    _config = configs ?? new UIConfiguration();
+    public bool NeverHide => _config.Hide == HideParametr.NeverHide;
 
-    if (_config.CacheType == CacheParametr.Cached)
-      DontDestroyOnLoad(gameObject);
-  }
+    private GameObject _element;
 
-  public virtual void Show()
-  {
-    _element.SetActive(true);
-  }
+    private UIConfiguration _config;
 
-  public virtual void Hide()
-  {
-    if (_config.CacheType == CacheParametr.Destroy)
-      Destroy(_element);
-    else
+    private void Awake()
+    {
+      Create();
+    }
+
+    protected virtual void Create()
+    {
+      _element = gameObject;
+
       _element.SetActive(false);
+    }
+
+    public virtual void Init(UIKey key, UIConfiguration configs)
+    {
+      Key = key;
+
+      _config = configs ?? new UIConfiguration();
+
+      if (_config.CacheType == CacheParametr.Cached)
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public virtual void Show()
+    {
+      _element.SetActive(true);
+    }
+
+    public virtual void Hide()
+    {
+      if (_config.CacheType == CacheParametr.Destroy)
+        Destroy(_element);
+      else
+        _element.SetActive(false);
+    }
+
+    protected virtual void OnCreate() { }
+
+    protected virtual void OnShow() { }
+
+    protected virtual void OnHide() { }
   }
-
-  protected virtual void OnCreate() { }
-
-  protected virtual void OnShow() { }
-
-  protected virtual void OnHide() { }
 }

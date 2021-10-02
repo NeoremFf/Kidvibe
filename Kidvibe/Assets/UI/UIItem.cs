@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UI
+namespace Kidvibe.UI
 {
   public class UIItem
   {

@@ -1,4 +1,4 @@
-﻿using UI;
+﻿using Kidvibe.UI;
 using UnityEngine;
 
 public class MainGameManager : MonoBehaviour

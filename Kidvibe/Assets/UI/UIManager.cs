@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace UI
+namespace Kidvibe.UI
 {
   public static class UIManager
   {

@@ -1,4 +1,4 @@
-﻿namespace UI
+﻿namespace Kidvibe.UI
 {
   public class UIConfiguration
   {

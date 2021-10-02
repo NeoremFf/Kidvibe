@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UI
+namespace Kidvibe.UI
 {
   public class UITarget
   {
     public Dictionary<string, string> texts;
 
-    public event Action OnSet;
+    public event Action Setted;
 
     public UITarget() =>
       texts = new Dictionary<string, string>();
@@ -16,7 +16,7 @@ namespace UI
     {
       texts[key] = value;
 
-      OnSet?.Invoke();
+      Setted?.Invoke();
     }
   }
 }
