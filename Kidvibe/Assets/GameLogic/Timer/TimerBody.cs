@@ -54,9 +54,13 @@ namespace Kidvibe.GameLogic.Timer
       _isDelay = true;
     }
 
-    protected virtual void Expired()
+    protected virtual void Expired() { }
+    
+    private void Expire()
     {
       _isRun = false;
+
+      Expired();
     }
     
     private void TimeTick(float timeLeft)
@@ -64,7 +68,7 @@ namespace Kidvibe.GameLogic.Timer
       _time -= timeLeft;
 
       if (_time <= 0) 
-        Expired();
+        Expire();
     }
     
     private void DelayTick(float timeLeft)
