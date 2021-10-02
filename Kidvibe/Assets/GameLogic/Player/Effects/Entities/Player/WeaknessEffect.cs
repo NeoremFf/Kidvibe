@@ -10,7 +10,7 @@ namespace Kidvibe.GameLogic.Player.Effects.Entities.Player
   public class WeaknessEffect : EffectCore
   {
     [Inject] private readonly PlayerMovementConfigs _configs;
-    
+
     protected override void Applied()
     {
       logger.LogWithTag(LogTag.Effect, LogColor.Green, $"{nameof(WeaknessEffect)} has been applied.");
