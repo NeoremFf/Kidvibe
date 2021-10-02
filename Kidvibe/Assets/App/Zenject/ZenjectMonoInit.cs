@@ -1,3 +1,4 @@
+using Kidvibe.GameData.Dynamic.Game.Player;
 using Kidvibe.GameData.Static.Configs.Player;
 using Kidvibe.GameLogic.Player.Effects.Core;
 using Kidvibe.GameLogic.Player.Effects.Pools;
@@ -21,6 +22,8 @@ namespace Kidvibe.App.Zenject
       Container.Bind<ITimerPool>().WithId("Player").To<PlayerTimerPool>().AsSingle();
       Container.Bind<IEffectPool>().WithId("Player").To<PlayerEffectsPool>().AsSingle();
 
+      Container.Bind<PlayerWrapper>().AsSingle();
+      
       Container.Bind<GameContext>().FromInstance(Contexts.sharedInstance.game).AsSingle();
     }
   }
